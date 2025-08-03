@@ -1,7 +1,7 @@
 import CustomInput from "@/components/form/CustomInput";
 import Heading from "@/components/typography/Heading";
 import { Button } from "@/components/ui/button";
-import { useLogin } from "@/hooks/forms/useLogin";
+import { useLogin } from "@/hooks/useLogin";
 import type { FormEvent } from "react";
 
 function Login() {
@@ -30,12 +30,12 @@ function Login() {
                     }}
                 >
                     <loginForm.Field
-                        name="username"
+                        name="email"
                         children={(field) => (
                             <CustomInput
-                                label="Username"
+                                label="Email"
                                 type="text"
-                                placeholder="Enter your username"
+                                placeholder="Enter your email"
                                 value={field.state.value}
                                 onChange={field.handleChange}
                                 onBlur={field.handleBlur}
