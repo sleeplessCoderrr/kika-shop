@@ -31,7 +31,7 @@ function Heading({
         right: 'text-right'
     };
     
-    const baseClasses = 'scroll-m-20 font-extrabold tracking-tight text-balance';
+    const baseClasses = 'scroll-m-20 font-extrabold tracking-tight text-balance font-sans';
     const combinedClasses = `${baseClasses} ${sizeClasses[size]} ${alignClasses[align]} ${className}`.trim();
     
     return (

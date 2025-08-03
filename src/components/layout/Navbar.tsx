@@ -5,15 +5,17 @@ import { ShoppingCart } from "lucide-react";
 function Navbar() {
   return (
     <header className="mb-6 w-3/4 flex flex-row justify-between items-center">
-        <Heading
-            content="Kika Store"
-            size="medium"
-            align="center"
-            className="font-bold text-gray-900"
-        />
+        <Link to="/" className="text-2xl font-bold">
+            <Heading
+                content="Kika Store"
+                size="medium"
+                align="center"
+                className="font-bold text-gray-900"
+            />
+        </Link>
         <nav>
             <ul className="flex justify-center space-x-4">
-                <Link to="/cart" className="text-blue-600 hover:underline">
+                <Link to="/cart">
                     <ShoppingCart />
                 </Link>
             </ul>
