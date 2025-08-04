@@ -1,9 +1,9 @@
 import { createRouter, RouterProvider } from '@tanstack/react-router'
+import { AuthProvider } from './contexts/AuthContext';
 import { createRoot } from 'react-dom/client'
 import { routeTree } from './routes/routes';
 import { StrictMode } from 'react'
 import './index.css'
-import { AuthProvider } from './contexts/AuthContext';
 
 const router = createRouter({
   routeTree,

@@ -1,8 +1,10 @@
 import { createRootRoute, createRoute } from "@tanstack/react-router";
-import App from "../App";
+import AdminDashboard from "@/pages/Admin/AdminDashboard"; 
 import Dashboard from "@/pages/Dashboard/Dashboard";
-import Login from "@/pages/Auth/Login";
+import { ProtectedRoute } from "./ProtectedRoutes";
 import UserCart from "@/pages/User/UserCart";
+import Login from "@/pages/Auth/Login";
+import App from "../App";
 
 const rootRoute = createRootRoute({
     component: App,
@@ -26,8 +28,15 @@ const userCartRoute = createRoute({
     component: UserCart,
 });
 
+const adminDashboardRoute = createRoute({
+    getParentRoute: () => rootRoute,
+    path: "/admin",
+    component: () => ProtectedRoute({ children: AdminDashboard() }),
+});
+
 export const routeTree = rootRoute.addChildren([
     indexRoute,
     loginRoute,
     userCartRoute,
+    adminDashboardRoute,
 ]);

@@ -12,6 +12,7 @@ interface CustomInputProps {
     name?: string;
     id?: string;
     error?: string;
+    className?: string;
 }
 
 const CustomInput = forwardRef<HTMLInputElement, CustomInputProps>(({ 
@@ -23,9 +24,11 @@ const CustomInput = forwardRef<HTMLInputElement, CustomInputProps>(({
     onBlur,
     name,
     id,
-    error
+    error,
+    className = ''
 }, ref) => {
     const inputId = id || name || label.toLowerCase().replace(/\s+/g, '-');
+    const inputClasses = `${error ? "border-red-500" : ""} ${className}`;
 
     return (
         <div className="grid w-full items-center gap-3">
@@ -41,7 +44,7 @@ const CustomInput = forwardRef<HTMLInputElement, CustomInputProps>(({
                 value={value}
                 onChange={(e) => onChange?.(e.target.value)}
                 onBlur={onBlur}
-                className={error ? "border-red-500" : ""}
+                className={inputClasses}
             />
             {error && (
                 <span className="text-sm text-red-500">{error}</span>

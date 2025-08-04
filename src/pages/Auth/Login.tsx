@@ -1,13 +1,23 @@
 import CustomInput from "@/components/form/CustomInput";
 import Heading from "@/components/typography/Heading";
 import { Button } from "@/components/ui/button";
+import { Toaster } from "@/components/ui/sonner";
 import { useLogin } from "@/hooks/useLogin";
 import type { FormEvent } from "react";
 
 function Login() {
-    const loginForm = useLogin();
+    const {
+        validateEmail,
+        validatePassword,
+        form
+    } = useLogin();
 
     return (
+        <>
+        <Toaster
+            position="bottom-right"
+            variant="clean"
+        />
         <div 
             className="flex items-center justify-center min-h-[calc(100vh-200px)]"
         >   
@@ -26,11 +36,15 @@ function Login() {
                     onSubmit={(e: FormEvent<HTMLFormElement>)=>{
                         e.preventDefault();
                         e.stopPropagation();
-                        loginForm.handleSubmit();
+                        form.handleSubmit();
                     }}
                 >
-                    <loginForm.Field
+                    <form.Field
                         name="email"
+                        validators={{
+                            onChange: ({ value }) => validateEmail(value),
+                            onBlur: ({ value }) => validateEmail(value)
+                        }}
                         children={(field) => (
                             <CustomInput
                                 label="Email"
@@ -41,12 +55,17 @@ function Login() {
                                 onBlur={field.handleBlur}
                                 name={field.name}
                                 error={field.state.meta.errors?.[0]}
+                                className="py-6"
                             />
                         )}
                     />
 
-                    <loginForm.Field
+                    <form.Field
                         name="password"
+                        validators={{
+                            onChange: ({ value }) => validatePassword(value),
+                            onBlur: ({ value }) => validatePassword(value)
+                        }}
                         children={(field) => (
                             <CustomInput
                                 label="Password"
@@ -57,6 +76,7 @@ function Login() {
                                 onBlur={field.handleBlur}
                                 name={field.name}
                                 error={field.state.meta.errors?.[0]}
+                                className="py-6"
                             />
                         )}
                     />
@@ -65,13 +85,15 @@ function Login() {
 
                     <Button
                         type="submit"
+                        disabled={!form.state.canSubmit}
                         className="text-md w-full bg-slate-900 text-white py-6 px-4 rounded-md hover:bg-slate-700 focus:outline-none focus:ring-2 focus:ring-slate-500 focus:ring-offset-2 transition duration-200"
                     >
-                        Login
+                        {form.state.isSubmitting ? "Signing in..." : "Login"}
                     </Button>
                 </form>
             </div>
         </div>
+        </>
     )
 }
 
